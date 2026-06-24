@@ -1,7 +1,7 @@
 class AlarmClock {
   constructor() {
     this.alarmCollection = [];
-    this.interValId = null;
+    this.intervalId = null;
   }
 
   addClock(time, callback) {
@@ -29,11 +29,11 @@ class AlarmClock {
   }
 
   start() {
-    if (this.interValId !== null) {
+    if (this.intervalId !== null) {
       return;
     }
 
-    this.interValId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       const currentTime = this.getCurrentFormattedTime();
       this.alarmCollection.forEach(alarm => {
         if (alarm.time === currentTime && alarm.canCall) {
@@ -45,17 +45,17 @@ class AlarmClock {
   }
 
   stop() {
-    if (this.interValId !== null) {
-      clearInterval(this.interValId);
-      this.interValId = null;
+    if (this.intervalId !== null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
     }    
   }
 
   resetAllCalls() {
-    this.alarmCollection.foreach(alarm => alarm.canCall = true);
+    this.alarmCollection.forEach(alarm => alarm.canCall = true);
   }
 
-  clearInterval() {
+  clearAlarms() {
     this.stop();
     this.alarmCollection = [];
   }
